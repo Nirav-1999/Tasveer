@@ -4,21 +4,21 @@ from django.contrib.auth.models import User
 
 
 MODEL_CHOICES = [
-    ("1", ("CNN")),
+    ("CNN", ("CNN")),
 ]
 
 
 class MlModel(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='mlmodel')
-    model_name = models.CharField(max_length=100)
-    model_type = models.CharField(choices=MODEL_CHOICES,default="CNN",max_length=100)
+    # model_name = models.CharField(max_length=100,blank=True)#,unique=True)
+    # model_type = models.CharField(choices=MODEL_CHOICES,default="CNN",max_length=100)
     zipfile = models.FileField()
 
     def __str__(self):
         return self.user.username + " - " + self.model_name
 
 class TrainedModel(models.Model):
-    modelfrom = models.ForeignKey(MlModel,on_delete=models.CASCADE,related_name='trainedmodel')
+    modelfrom = models.OneToOneField(MlModel,on_delete=models.CASCADE,related_name='trainedmodel')
     trained_model = models.FileField()
 
     def __str__(self):

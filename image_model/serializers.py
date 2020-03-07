@@ -7,7 +7,7 @@ class MlModelSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = MlModel
-        fields = ('id','user','model_name','model_type','zipfile')
+        fields = ('id','user','zipfile')
 
 
 class TrainedModelSerializer(serializers.HyperlinkedModelSerializer):
