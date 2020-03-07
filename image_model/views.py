@@ -20,13 +20,12 @@ class MlModelViewset(viewsets.ModelViewSet):
         return self.request.user.mlmodel.all()
 
     def perform_create(self,serializer):
-        print(self.request.data['zipfile'].file)
-        print(str(self.request.data['zipfile']) in os.listdir('D:\codeshastra6.0\codeshastra6.0\media') )
-        print(os.listdir('D:\codeshastra6.0\codeshastra6.0\media'))
+        print(type(self.request.data['zipfile']))
+        # print(str(self.request.data['zipfile']) in os.listdir('D:\codeshastra6.0\codeshastra6.0\media') )
+        # print(os.listdir('D:\codeshastra6.0\codeshastra6.0\media'))
         serializer.save(user=self.request.user)
-        z = zipfile.ZipFile(io.BytesIO(self.request.data['zipfile'].file))
-        print(z.infolist()[0])
-
+        z = zipfile.ZipFile(self.request.data['zipfile'].file)
+        z.extractall()
         
 
 
