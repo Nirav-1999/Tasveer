@@ -10,6 +10,7 @@ app_name = "image_model"
 # router=SimpleRouter()
 router = DefaultRouter()
 router.register(r"mymodels", views.MlModelViewset,base_name="MyModel")
+router.register(r"trainedmodel", views.TrainedModelViewset,base_name="TrainedModel")
 
 
 urlpatterns = [

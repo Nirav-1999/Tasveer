@@ -10,8 +10,13 @@ MODEL_CHOICES = [
 
 class MlModel(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='mlmodel')
+<<<<<<< HEAD
     model_name = models.CharField(max_length=100,unique=True)
     model_type = models.CharField(choices=MODEL_CHOICES,default="CNN",max_length=100)
+=======
+    # model_name = models.CharField(max_length=100,blank=True)#,unique=True)
+    # model_type = models.CharField(choices=MODEL_CHOICES,default="CNN",max_length=100)
+>>>>>>> 726461d9081b2c5a82db7a0d704935b9f5c3ed74
     zipfile = models.FileField()
 
     def __str__(self):
