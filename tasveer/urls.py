@@ -24,6 +24,7 @@ urlpatterns = [
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
     path("api-auth/", include("rest_framework.urls")),
+    path("api/",include("image_model.urls"))
 ]
 
 

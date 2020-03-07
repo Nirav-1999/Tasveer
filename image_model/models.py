@@ -9,7 +9,7 @@ MODEL_CHOICES = [
 
 
 class MlModel(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='mlmodel')
     model_name = models.CharField(max_length=100)
     model_type = models.CharField(choices=MODEL_CHOICES,default="CNN",max_length=100)
     zipfile = models.FileField()
@@ -18,7 +18,7 @@ class MlModel(models.Model):
         return self.user.username + " - " + self.model_name
 
 class TrainedModel(models.Model):
-    modelfrom = models.ForeignKey(MlModel,on_delete=models.CASCADE)
+    modelfrom = models.ForeignKey(MlModel,on_delete=models.CASCADE,related_name='trainedmodel')
     trained_model = models.FileField()
 
     def __str__(self):
