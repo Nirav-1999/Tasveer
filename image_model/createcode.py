@@ -38,7 +38,7 @@ def create(arr,stat):
         if 'Convolutional' not in seen:
             f.write("model.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}',input_shape=({},{},3)))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation'],args['input_shape_x'],args['input_shape_y']))
         else:
-            f.write("model.add(Layers.Conv2D({},kernel_size={},activation='{}'))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation']))
+            f.write("model.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}'))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation']))
 
     def MaxPool2D(*args):
         args=args[0]
@@ -79,7 +79,8 @@ from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix as CM
 from random import randint
 from IPython.display import SVG
-import matplotlib.gridspec as gridspec\n""")
+import matplotlib.gridspec as gridspec
+import pickle\n""")
         f.write("model = Models.Sequential()\n")
         # l=['Convolutional','Convolutional','MaxPool2D','Dense','Dropout']
         l=[]
