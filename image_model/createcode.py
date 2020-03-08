@@ -62,7 +62,7 @@ def create(arr,stat):
     'Dense':Dense,
     'Dropout':Dropout
 }
-    with open('code.py','w+') as f:
+    with open('image_model\code.py','w+') as f:
     
         f.write("""import tensorflow.keras.layers as Layers
 import pickle
@@ -94,7 +94,7 @@ def train(images,labels):\n""")
             switcher.get(l[i])(arr[i])
             seen.add(l[i])
         f.write("\tmodel.compile(optimizer=Optimizer.Adam(lr={}),loss='sparse_categorical_crossentropy',metrics=['accuracy'])\n".format(stat['learning_rate']))
-        f.write("\treturn model")
+        f.write("\ttrained = model.fit(Images,Labels,epochs={},validation_split=0.30)\n\treturn trained".format(stat['epoch']))
     
 
 
