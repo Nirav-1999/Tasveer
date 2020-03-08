@@ -93,7 +93,7 @@ def train(images,labels):\n""")
             switcher.get(l[i])(arr[i])
             seen.add(l[i])
         f.write("\tmodel.compile(optimizer=Optimizer.Adam(lr={}),loss='sparse_categorical_crossentropy',metrics=['accuracy'])\n".format(stat['learning_rate']))
-        # f.write("with open('trainer','ab') as f:\n\tpickle.dump(model,f)")
+        f.write("\ttrained = model.fit(Images,Labels,epochs={},validation_split=0.30)\n\treturn trained".format(stat['epoch']))
     
 
 
