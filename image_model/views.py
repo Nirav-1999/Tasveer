@@ -11,6 +11,8 @@ from .serializers import MlModelSerializer, TrainedModelSerializer,ImageSerializ
 import os
 from .createcode import create
 import zipfile
+import numpy as np
+import pickle
 # Create your views here.
 
 
@@ -98,17 +100,23 @@ class Parameters(APIView):
         # print(request.data)
         # print(request.data.keys())
         create(arr,stat)
-        from ..code import train
+        from .code import train
         Images, Labels = get_images('../input/seg_train/seg_train/') #Extract the training images from the folders.
         Images = np.array(Images) #converting the list of images to numpy array.
         Labels = np.array(Labels)
-        train(Images,Labels)
-
-        
+        model = train(Images,Labels)
+        test_images,test_labels = get_images('../input/seg_test/seg_test/')
+        test_images = np.array(test_images)
+        test_labels = np.array(test_labels)
+        x = model.evaluate(test_images,test_labels, verbose=1)
+        with open("image_model/model_checkpoint","wb") as f:
+            pickle.dump(model,f)
         # print(stat)
         # print(arr)
         return Response({
             "Message":"Success",
+            "loss": x[0],
+            "accuracy": x[1]
         })
 l=[]
 class Images128(APIView):
