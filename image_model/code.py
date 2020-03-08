@@ -14,14 +14,13 @@ import numpy as np
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix as CM
 from random import randint
-def train(Images,Labels):
+from IPython.display import SVG
+import matplotlib.gridspec as gridspec
+def train(images,labels):
 	model = Models.Sequential()
-	model.add(Layers.Conv2D(200,kernel_size=(3,3),activation='relu',input_shape=(150,150,3)))
-	model.add(Layers.Conv2D(180,kernel_size=(3,3),activation='relu'))
-	model.add(Layers.MaxPool2D(5,5))
-	model.add(Layers.Conv2D(180,kernel_size=(3,3),activation='relu'))
+	model.add(Layers.Conv2D(124,kernel_size=(3,3),activation='Relu',input_shape=(125,125,3)))
 	model.add(Layers.Flatten())
-	model.add(Layers.Dense(180,activation='relu'))
+	model.add(Layers.Dense(10,activation='Sigmoid'))
 	model.compile(optimizer=Optimizer.Adam(lr=0.0001),loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 	trained = model.fit(Images,Labels,epochs=35,validation_split=0.30)
 	return trained
