@@ -36,25 +36,25 @@ def create(arr,stat):
     def Conv2D(*args):
         args=args[0]
         if 'Convolutional' not in seen:
-            f.write("model.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}',input_shape=({},{},3)))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation'],args['input_shape_x'],args['input_shape_y']))
+            f.write("\tmodel.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}',input_shape=({},{},3)))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation'],args['input_shape_x'],args['input_shape_y']))
         else:
-            f.write("model.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}'))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation']))
+            f.write("\tmodel.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}'))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation']))
 
     def MaxPool2D(*args):
         args=args[0]
-        f.write("model.add(Layers.MaxPool2D({},{}))\n".format(args['kernel_size_x'],args['kernel_size_y']))
+        f.write("\tmodel.add(Layers.MaxPool2D({},{}))\n".format(args['kernel_size_x'],args['kernel_size_y']))
         # print(args)
 
     def Dense(*args):
         args=args[0]
         if 'Dense' in seen:
-            f.write("model.add(Layers.Dense({},activation='{}'))\n".format(args['number_of_nodes'],args['activation']))
+            f.write("\tmodel.add(Layers.Dense({},activation='{}'))\n".format(args['number_of_nodes'],args['activation']))
         else:
-            f.write("model.add(Layers.Flatten())\n")
-            f.write("model.add(Layers.Dense({},activation='{}'))\n".format(args['number_of_nodes'],args['activation']))
+            f.write("\tmodel.add(Layers.Flatten())\n")
+            f.write("\tmodel.add(Layers.Dense({},activation='{}'))\n".format(args['number_of_nodes'],args['activation']))
 
     def Dropout(*args):
-        f.write('model.add(Layers.Dropout(rate={}))\n'.format(dropout))
+        f.write('\tmodel.add(Layers.Dropout(rate={}))\n'.format(dropout))
         
     switcher={
     'Convolutional':Conv2D,
@@ -65,6 +65,7 @@ def create(arr,stat):
     with open('code.py','w+') as f:
     
         f.write("""import tensorflow.keras.layers as Layers
+import pickle
 import tensorflow.keras.activations as Actications
 import tensorflow.keras.models as Models
 import tensorflow.keras.optimizers as Optimizer
@@ -72,6 +73,7 @@ import tensorflow.keras.metrics as Metrics
 import tensorflow.keras.utils as Utils
 from keras.utils.vis_utils import model_to_dot
 import os
+import pickle
 import matplotlib.pyplot as plot
 import cv2
 import numpy as np
@@ -80,8 +82,8 @@ from sklearn.metrics import confusion_matrix as CM
 from random import randint
 from IPython.display import SVG
 import matplotlib.gridspec as gridspec
-import pickle\n""")
-        f.write("model = Models.Sequential()\n")
+def train(images,labels):\n""")
+        f.write("\tmodel = Models.Sequential()\n")
         # l=['Convolutional','Convolutional','MaxPool2D','Dense','Dropout']
         l=[]
         for i in arr:
@@ -91,8 +93,8 @@ import pickle\n""")
         for i in range(len(l)):
             switcher.get(l[i])(arr[i])
             seen.add(l[i])
-        f.write("model.compile(optimizer=Optimizer.Adam(lr={}),loss='sparse_categorical_crossentropy',metrics=['accuracy'])\n".format(stat['learning_rate']))
-        f.write("trained = model.fit(Images,Labels,epochs=35,validation_split=0.30)\nwith open('trainer','ab') as f:\n\tpickle.dump(trained,f)")
+        f.write("\tmodel.compile(optimizer=Optimizer.Adam(lr={}),loss='sparse_categorical_crossentropy',metrics=['accuracy'])\n".format(stat['learning_rate']))
+        f.write("\treturn model")
     
 
 

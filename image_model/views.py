@@ -63,7 +63,7 @@ class Parameters(APIView):
         # print(request.data)
         # print(request.data.keys())
         create(arr,stat)
-        os.system("python ..\code.py ")
+        os.system("python ../code.py ")
         
         # print(stat)
         # print(arr)
@@ -83,6 +83,29 @@ class Images128(APIView):
         return Response({
             "Data":"Success"
         })
+# l=[]
+# class Images128(APIView):
+#     def get(self,request):
+#         x=Images.objects.all()
+#         print(x)
+#         return Response({
+#             'images':x
+#         },content_type="image/png")
+
+#     def post(self,request):
+#         # print(request)
+#         for files in request.data.getlist('images'):
+#             m=Images(image=files)
+#             m.save()
+            
+#         # for ele in request.data:
+#         #     print(ele['images'])
+#         # for i in f:
+#         #     l.append(i)
+#         # print(l)
+#         return Response({
+#             "Data":"Success"
+#         })
 
 
 
