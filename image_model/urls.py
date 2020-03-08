@@ -18,6 +18,6 @@ urlpatterns = [
     url(r'',include(router.urls)),
     url(r'zipfile',views.Zip.as_view()),
     url(r'parameters',views.Parameters.as_view()),
-
+    url(r'imagepost',views.Images128.as_view()),
 
 ]

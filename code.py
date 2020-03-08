@@ -1,12 +1,13 @@
 import tensorflow.keras.layers as Layers
+import pickle
 import tensorflow.keras.activations as Actications
 import tensorflow.keras.models as Models
 import tensorflow.keras.optimizers as Optimizer
 import tensorflow.keras.metrics as Metrics
 import tensorflow.keras.utils as Utils
 from keras.utils.vis_utils import model_to_dot
-import pickle
 import os
+import pickle
 import matplotlib.pyplot as plot
 import cv2
 import numpy as np

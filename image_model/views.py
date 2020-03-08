@@ -110,6 +110,19 @@ class Parameters(APIView):
         return Response({
             "Message":"Success",
         })
+l=[]
+class Images128(APIView):
+
+    def post(self,request):
+       
+        for files in request.data.getlist('images'):
+            m=Images(image=files)
+            m.save()
+            
+    
+        return Response({
+            "Data":"Success"
+        })
 # l=[]
 # class Images128(APIView):
 #     def get(self,request):
@@ -138,6 +151,7 @@ class Parameters(APIView):
 
 class ImagesViewset(viewsets.ModelViewSet):
     queryset=Images.objects.all()
+    print(len(queryset))
     serializer_class=ImageSerializer
-    permission_classes=[permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,]
+    permission_classes=[permissions.AllowAny,]
 
