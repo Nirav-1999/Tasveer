@@ -18,8 +18,11 @@ from IPython.display import SVG
 import matplotlib.gridspec as gridspec
 def train(images,labels):
 	model = Models.Sequential()
-	model.add(Layers.Conv2D(124,kernel_size=(3,3),activation='Relu',input_shape=(125,125,3)))
+	model.add(Layers.Conv2D(123,kernel_size=(3,3),activation='relu',input_shape=(124,123,3)))
 	model.add(Layers.Flatten())
-	model.add(Layers.Dense(10,activation='Sigmoid'))
+	model.add(Layers.Dense(123,activation='sigmoid'))
+	model.add(Layers.Conv2D(124,kernel_size=(3,3),activation='sigmoid'))
+	model.add(Layers.MaxPool2D(4,4))
+	model.add(Layers.Conv2D(4546,kernel_size=(3,3),activation='sigmoid'))
 	model.compile(optimizer=Optimizer.Adam(lr=0.0001),loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 	return model

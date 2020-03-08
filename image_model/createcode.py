@@ -36,7 +36,7 @@ def create(arr,stat):
     def Conv2D(*args):
         args=args[0]
         if 'Convolutional' not in seen:
-            f.write("\tmodel.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}',input_shape=({},{},3)))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation'],args['input_shape_x'],args['input_shape_y']))
+            f.write("\tmodel.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}',input_shape=({},{},3)))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation'],stat['input_shape_x'],stat['input_shape_y']))
         else:
             f.write("\tmodel.add(Layers.Conv2D({},kernel_size=({},{}),activation='{}'))\n".format(args['number_of_filters'],args['kernel_size_x'],args['kernel_size_y'],args['activation']))
 
