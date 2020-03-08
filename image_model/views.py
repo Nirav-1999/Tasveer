@@ -63,7 +63,8 @@ class Parameters(APIView):
         # print(request.data)
         # print(request.data.keys())
         create(arr,stat)
-
+        os.system("python ..\code.py ")
+        
         # print(stat)
         # print(arr)
         return Response({
