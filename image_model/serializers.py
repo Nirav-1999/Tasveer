@@ -1,13 +1,13 @@
-from .models import MlModel,TrainedModel
+from .models import MlModel,TrainedModel,Images
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
 class MlModelSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+    # user = serializers.ReadOnlyField(source='user.username')
     
     class Meta:
         model = MlModel
-        fields = ('id','user','zipfile')
+        fields = ('id','zipfile')
 
 
 class TrainedModelSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,3 +16,13 @@ class TrainedModelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MlModel
         fields = ('id','modelfrom','trained_model')
+
+class ImageSerializer(serializers.HyperlinkedModelSerializer):
+
+    # image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Images
+        fields = ('image',)
+
+   
